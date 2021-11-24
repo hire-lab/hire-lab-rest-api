@@ -1,0 +1,12 @@
+[
+    {
+        "email": "martina@gmail.com",
+        "name": "Martina Ivanova",
+        "hashedPassword": "00vqwvfjyd1ljdbb"
+    },
+    {
+        "email": "grigor@gmail.com",
+        "name": "Grigor Dimitrov",
+        "hashedPassword": "kdnqjqbbfjyd1ljd"
+    }
+]
