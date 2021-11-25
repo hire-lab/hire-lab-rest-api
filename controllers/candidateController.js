@@ -6,8 +6,9 @@ router.get('/', async (req, res) => {
     res.json(candidates)
 })
 
-router.get('/:id', preload(), async (req, res) => {
-    const candidate = await req.candidateStorage.getOne()
+router.get('/:id', preload(), (req, res) => {
+    const candidate = req.data;
+    console.log(candidate)
     res.json(candidate)
 })
 
