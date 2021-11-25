@@ -2,7 +2,7 @@ module.exports = (paramName = 'id') => async (req, res, next) => {
     const id = req.params[paramName];
 
     try {
-        const data =  await req.storage.getById(id);
+        const data =  await req.candidateStorage.getOne(id);
         if (!data) {
             throw new Error('Not found')
         }
