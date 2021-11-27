@@ -2,8 +2,8 @@ const express = require('express')
 const dbConfig = require('./config/database')
 const {PORT} = require('./config/index')
 const cors = require('./middlewares/cors')
-const storage = require('./middlewares/storage')
 const auth = require('./middlewares/auth')
+const jobStorage = require('./middlewares/jobStorage')
 const candidateStorage = require('./middlewares/candidateStorage')
 const userController = require('./controllers/userController') 
 const jobsController = require('./controllers/jobsController') 
@@ -19,7 +19,7 @@ async function start(){
     
     app.use(cors())
     app.use(auth())
-    app.use(storage())
+    app.use(jobStorage())
     app.use(candidateStorage())
     app.use(express.json())
 
