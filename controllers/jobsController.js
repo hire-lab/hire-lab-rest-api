@@ -23,6 +23,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', preloadJob(), async (req, res) => {
     const job = req.jobData.toObject();
+   console.log(job)
    res.json(job)
 })
 
