@@ -7,13 +7,11 @@ router.get('/', async (req, res) => {
    res.json(jobs)
 })
 
-/*router.post('/', isAuth(), async (req, res) => {
+//add isAuth() middleware after authentication is set up
+router.post('/', async (req, res) => {
     const jobsData = {
         title: req.body.title,
-        description: req.body.description,
-        requirements: req.body.requirements,
-        icon: req.body.icon,
-        owner: req.user._id
+        description: req.body.description
     }
     try {
         const result = await req.storage.create(jobsData)
@@ -23,7 +21,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:id', preload(), async (req, res) => {
+/*router.get('/:id', preload(), async (req, res) => {
     const job = req.data.toObject();
    res.json(job)
 })
