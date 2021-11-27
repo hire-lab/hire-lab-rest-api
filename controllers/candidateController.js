@@ -8,7 +8,6 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', preload(), (req, res) => {
     const candidate = req.data;
-    console.log(candidate)
     res.json(candidate)
 })
 
