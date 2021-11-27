@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {isAuth, isOwner} = require('../middlewares/guards')
-const preload = require('../middlewares/preload')
+const preloadJob = require('../middlewares/preloadJob')
 
 router.get('/', async (req, res) => {
    const jobs = await req.storage.getAll();
@@ -21,12 +21,12 @@ router.post('/', async (req, res) => {
     }
 })
 
-/*router.get('/:id', preload(), async (req, res) => {
+router.get('/:id', preloadJob(), async (req, res) => {
     const job = req.data.toObject();
    res.json(job)
 })
 
-router.put('/:id', isAuth(), preload(), isOwner(), async (req, res) => {
+/*router.put('/:id', isAuth(), preload(), isOwner(), async (req, res) => {
     const updated = {
         title: req.body.title,
         description: req.body.description,
