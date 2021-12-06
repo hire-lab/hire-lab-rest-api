@@ -6,18 +6,18 @@ router.post('/register', async (req, res) => {
 
     try {
         if (!email){
-            throw new Error('Email is required')
+            throw new Error('Email is required.')
         }
 
         if (!name){
-            throw new Error('Please fill out your name')
+            throw new Error('Please fill out your name.')
         }
 
         if (password.length < 3){
-            throw new Error('Password must be at least 3 characters')
+            throw new Error('Password must be at least 3 characters long.')
         }
 
-        const userData = await register(email.toLowerCase().trim(), name, password.trim())
+        const userData = await register(email.toLowerCase().trim(), name.trim(), password.trim())
         res.json(userData)
 
     } catch (err) {
