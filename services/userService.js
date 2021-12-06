@@ -30,7 +30,7 @@ async function register(email, name, password) {
 }
 
 async function login(email, password){
-    const user = await User.findOne({email})
+    const user = await User.findOne({email}).lean()
 
     if (!user) {
         const err = new Error('Incorrect email or password');
