@@ -7,7 +7,7 @@ module.exports = (paramName = 'id') => async (req, res, next) => {
             throw new Error('Not found')
         }
 
-        req.data = data;
+        req.jobData = data;
         next()
     } catch (err) {
         res.status(403).json({message: 'No such record'})
