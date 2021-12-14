@@ -26,7 +26,7 @@ router.get('/:id', preloadJob(), async (req, res) => {
    res.json(job)
 })
 
-/*router.put('/:id', isAuth(), preload(), isOwner(), async (req, res) => {
+/*router.put('/:id', preloadJob(), async (req, res) => {
     const updated = {
         title: req.body.title,
         description: req.body.description,
@@ -39,15 +39,15 @@ router.get('/:id', preloadJob(), async (req, res) => {
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})
     }
-})
+})*/
 
-router.delete('/:id', isAuth(), preload(), isOwner(), async (req, res) => {
+router.delete('/:id', preloadJob(), async (req, res) => {
     try {
         await req.storage.remove(req.params.id)
         res.status(204).end()
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})
     }
-})*/
+})
 
 module.exports = router;
