@@ -7,8 +7,8 @@ router.get('/', async (req, res) => {
    res.json(jobs)
 })
 
-//add isAuth() middleware after authentication is set up
-router.post('/', async (req, res) => {
+
+router.post('/', isAuth(), async (req, res) => {
     const jobsData = {
         title: req.body.title,
         description: req.body.description
