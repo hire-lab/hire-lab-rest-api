@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
 })
 
 
-router.post('/', isAuth(), async (req, res) => {
+router.post('/', async (req, res) => {
     const jobsData = {
         title: req.body.title,
         description: req.body.description
