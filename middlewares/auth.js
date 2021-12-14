@@ -7,7 +7,6 @@ module.exports = () => (req, res, next) => {
     try {
         if (token) {
             const userData = jwt.verify(token, SECRET)
-            console.log(userData)
             req.user = userData;
         }
     } catch (err) {
