@@ -6,7 +6,6 @@ router.get('/', async (req, res) => {
    res.json(jobs)
 })
 
-
 router.post('/', async (req, res) => {
     const jobsData = {
         title: req.body.title,
@@ -22,23 +21,22 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', preloadJob(), async (req, res) => {
     const job = req.jobData;
-   res.json(job)
+    res.json(job)
 })
 
-/*router.put('/:id', preloadJob(), async (req, res) => {
+router.put('/:id', preloadJob(), async (req, res) => {
     const updated = {
         title: req.body.title,
-        description: req.body.description,
-        requirements: req.body.requirements
+        description: req.body.description
     }
 
     try {
-        const result = await req.storage.update(req.data, updated)
+        const result = await req.storage.update(req.params.id, updated)
         res.json(result)
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})
     }
-})*/
+})
 
 router.delete('/:id', preloadJob(), async (req, res) => {
     try {
