@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const {isAuth, isOwner} = require('../middlewares/guards')
 const preloadJob = require('../middlewares/preloadJob')
 
 router.get('/', async (req, res) => {
