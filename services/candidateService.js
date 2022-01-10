@@ -1,4 +1,4 @@
-const Candidate = require('../models/Candidate')
+const Candidate = require('../models/Candidate');
 
 async function getAll(){
     return await Candidate.find({}).lean()
@@ -21,6 +21,7 @@ async function create(data) {
     await result.save()
     return result;
 }
+
 
 module.exports = {
     getAll,
