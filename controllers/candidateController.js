@@ -25,4 +25,13 @@ router.post('/', async(req, res) => {
     }
 })
 
+router.post('/:id/interviews', async (req, res) => {
+    try {
+        const result = await req.interviewStorage.bookInterview({jobId, candidateId});
+        res.status(201).json(result)
+    } catch (err) {
+        res.status(err.status || 400).json({message: err.message})
+    }
+})
+
 module.exports = router;
