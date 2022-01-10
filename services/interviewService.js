@@ -14,9 +14,9 @@ async function getByCandidateId(id){
     return await Interview.find({id}).lean();
 }
 
-async function bookInterview(candidateId, jobId){
-    const candidate = await Candidate.findById(candidateId);
-    const job = await Job.findById(jobId);
+async function bookInterview({jobId, candidateId}){
+    const candidate = await Candidate.findById({candidateId}).lean();
+    const job = await Job.findById({jobId}).lean();
 
     candidate.interview.push(jobId);
     job.potentialCandidates.push(candidateId);
@@ -24,7 +24,7 @@ async function bookInterview(candidateId, jobId){
     await candidate.save();
     await job.save();
 
-    const result = new Interview(candidateId, jobId);
+    const result = new Interview(jobId, candidateId);
     await result.save()
     return result;
 }
