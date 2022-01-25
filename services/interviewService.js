@@ -28,6 +28,5 @@ async function bookInterview({jobId, candidateId}){
 module.exports = {
     getAll,
     getByJobId,
-    getByCandidateId,
     bookInterview
 }
