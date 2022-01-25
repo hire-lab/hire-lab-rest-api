@@ -10,10 +10,6 @@ async function getByJobId(id){
     return await Interview.find({id}).lean();
 }
 
-async function getByCandidateId(id){
-    return await Interview.find({id}).lean();
-}
-
 async function bookInterview({jobId, candidateId}){
     const candidate = await Candidate.findById({candidateId}).lean();
     const job = await Job.findById({jobId}).lean();
