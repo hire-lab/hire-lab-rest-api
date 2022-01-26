@@ -7,12 +7,14 @@ async function getAll() {
 }
 
 async function getByJobId(id){
-    return await Interview.find({id}).lean();
+    return await Interview.findById(id).lean();
 }
 
-async function bookInterview({jobId, candidateId}){
-    const candidate = await Candidate.findById({candidateId}).lean();
-    const job = await Job.findById({jobId}).lean();
+async function bookInterview(jobId, candidateId){
+    const candidate = await Candidate.findById(candidateId).lean();
+    const job = await Job.findById(jobId).lean();
+    console.log(candidate)
+    console.log(job)
 
     candidate.interview.push(jobId);
     job.potentialCandidates.push(candidateId);
