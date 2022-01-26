@@ -25,9 +25,16 @@ router.post('/', async(req, res) => {
     }
 })
 
+router.get('/:id/interviews', preloadCandidate(), (req, res) => {
+    const candidate = req.data;
+    res.json(candidate)
+})
+
 router.post('/:id/interviews', async (req, res) => {
     try {
-        const result = await req.interviewStorage.bookInterview({jobId, candidateId});
+        console.log('jobId: ', jobId)
+        console.log('candidate id: ', candidateId)
+        const result = await req.interviewStorage.bookInterview(jobId, candidateId);
         res.status(201).json(result)
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})

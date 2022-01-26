@@ -6,11 +6,11 @@ router.post('/register', async (req, res) => {
 
     try {
         if (!email){
-            throw new Error('Email is required.')
+            throw new Error('Email is required')
         }
 
         if (!name){
-            throw new Error('Please fill out your name.')
+            throw new Error('Please fill out your name')
         }
 
         if (password.length < 3){
