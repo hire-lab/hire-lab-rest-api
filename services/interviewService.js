@@ -10,22 +10,11 @@ async function getByJobId(id){
     return await Interview.findById(id).lean();
 }
 
-async function bookInterview(jobId, candidateId){
-    const candidate = await Candidate.findById(candidateId).lean();
-    const job = await Job.findById(jobId).lean();
-    console.log(candidate)
-    console.log(job)
-
-    candidate.interview.push(jobId);
-    job.potentialCandidates.push(candidateId);
-
-    await candidate.save();
-    await job.save();
-
-    const result = new Interview(jobId, candidateId);
+/*async function bookInterview(jobId){
+    const result = new Interview(jobId);
     await result.save()
     return result;
-}
+}*/
 
 module.exports = {
     getAll,
