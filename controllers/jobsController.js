@@ -2,8 +2,13 @@ const router = require('express').Router();
 const preloadJob = require('../middlewares/preloadJob')
 
 router.get('/', async (req, res) => {
-   const jobs = await req.storage.getAll();
-   res.json(jobs)
+    try {
+        const jobs = await req.storage.getAll();
+        res.json(jobs)
+    } catch (err) {
+        res.status(err.status || 400).json({message: err.message})
+    }
+   
 })
 
 router.post('/', async (req, res) => {
@@ -20,8 +25,12 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/:id', preloadJob(), async (req, res) => {
-    const job = req.jobData;
-    res.json(job)
+    try {
+        const job = req.jobData;
+        res.json(job)
+    } catch (err) {
+        res.status(err.status || 400).json({message: err.message})
+    }
 })
 
 router.put('/:id', preloadJob(), async (req, res) => {
