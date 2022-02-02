@@ -1,7 +1,7 @@
 const Interview = require('../models/Intervew');
 
-async function getAll() {
-    return await Interview.find({}).lean();
+async function getAll(filter) {
+    return await Interview.find(filter).lean();
 }
 
 async function getInterviewsByJobId(jobId) {
