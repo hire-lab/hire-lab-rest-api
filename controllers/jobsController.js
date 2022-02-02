@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const preloadJob = require('../middlewares/preloadJob')
+const preloadJob = require('../middlewares/preloadJob');
+
+const jobInterviewsController = require('./jobInterviewsController')
 
 router.get('/', async (req, res) => {
     try {
@@ -55,5 +57,7 @@ router.delete('/:id', preloadJob(), async (req, res) => {
         res.status(err.status || 400).json({message: err.message})
     }
 })
+
+router.use('/:id/interviews', jobInterviewsController)
 
 module.exports = router;
