@@ -10,6 +10,20 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.post('/', async (req, res) => {
+    const interviewData = {
+        job: req.body.jobId,
+        potenitalCandidates: req.body.candidateId
+    }
+
+    try {
+        const result = await req.interviewStorage.bookInterview(interviewData)
+        res.status(201).json(result)
+    } catch (err) {
+        res.status(err.status || 400).json({message: err.message})
+    }
+})
+
 /*router.get('/:id', async (req, res) => {
     const interviews = await req.interviewStorage.getInterviewsByJobId();
     res.json(interviews)
