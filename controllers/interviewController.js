@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const interviewData = {
         job: req.body.jobId,
-        potenitalCandidates: req.body.candidateId
+        potentialCandidates: req.body.candidateId
     }
 
     try {
