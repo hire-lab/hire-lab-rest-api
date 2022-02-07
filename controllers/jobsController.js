@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.get('/:id', preloadJob(), async (req, res) => {
+router.get('/:id', preloadJob(), (req, res) => {
     try {
         const job = req.jobData;
         res.json(job)
