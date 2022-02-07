@@ -22,9 +22,20 @@ async function create(data) {
     return result;
 }
 
+async function update(id, updated) {
+    const candidate = await Candidate.findById(id)
+
+    candidate.name = updated.name;
+    candidate.email = updated.email;
+
+    await candidate.save()
+    return candidate;
+}
+
 
 module.exports = {
     getAll,
     getOne,
-    create
+    create,
+    update
 }
