@@ -26,10 +26,6 @@ router.post('/', async (req, res) => {
     }
 })
 
-/*router.get('/:id', async (req, res) => {
-    const interviews = await req.interviewStorage.getInterviewsByJobId();
-    res.json(interviews)
-})*/
 
 module.exports = router;
 
