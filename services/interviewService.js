@@ -1,5 +1,5 @@
 const Interview = require('../models/Intervew');
-const Job = require('../models/Job');
+const Candidate = require('../models/Candidate');
 
 async function getAll() {
     return await Interview.find({}).lean();
@@ -14,8 +14,10 @@ async function getCandidateInterviews(candidateId) {
 }
 
 async function bookInterview(interviewData){ 
+    const candidateId = interviewData.potentialCandidates;
     const result = new Interview(interviewData);    
     await result.save();
+    await Candidate.findByIdAndDelete(candidateId)
     return result;
 }
 
