@@ -48,4 +48,13 @@ router.put('/:id', preloadCandidate(), async (req, res) => {
     }
 })
 
+router.delete('/:id', preloadCandidate(), async (req, res) => {
+    try {
+        await req.candidateStorage.remove(req.params.id)
+        res.status(204).end()
+    } catch (err) {
+        res.status(err.status || 400).json({message: err.message})
+    }
+})
+
 module.exports = router;
