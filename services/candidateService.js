@@ -32,10 +32,14 @@ async function update(id, updated) {
     return candidate;
 }
 
+async function remove(id) {
+    return Candidate.findByIdAndDelete(id)
+}
 
 module.exports = {
     getAll,
     getOne,
     create,
-    update
+    update,
+    remove
 }
