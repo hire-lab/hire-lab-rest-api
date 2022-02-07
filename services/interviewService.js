@@ -6,7 +6,7 @@ async function getAll() {
 }
 
 async function getInterviewsByJobId(jobId) {
-    return await Interview.find({ jobId }).lean();
+    return await Interview.find({job: jobId}).lean();
 }
 
 async function getCandidateInterviews(candidateId) {
