@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const preloadJob = require('../middlewares/preloadJob');
 
-const jobInterviewsController = require('./jobInterviewsController')
-
 router.get('/', async (req, res) => {
     try {
         const jobs = await req.storage.getAll();
@@ -58,6 +56,14 @@ router.delete('/:id', preloadJob(), async (req, res) => {
     }
 })
 
-router.use('/:id/interviews', jobInterviewsController)
+router.get('/:id/interviews', async (req, res) => {
+    try {
+        const jobId = req.params.id;
+        const interviews = await req.interviewStorage.getInterviewsByJobId(jobId);
+        res.json(interviews)
+    } catch (err) {
+        res.status(err.status || 400).json({message: err.message})
+    }
+})
 
 module.exports = router;
