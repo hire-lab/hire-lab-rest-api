@@ -57,4 +57,14 @@ router.delete('/:id', preloadCandidate(), async (req, res) => {
     }
 })
 
+/*router.get('/:id/interviews', async (req, res) => {
+    try {
+        const candidateId = req.params.id;
+        const interviews = await req.interviewStorage.getCandidateInterviews(candidateId)
+        res.json(interviews)
+    } catch (err) {
+        res.status(err.status || 400).json({message: err.message})
+    }
+})*/
+
 module.exports = router;
