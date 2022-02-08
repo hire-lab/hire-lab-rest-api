@@ -9,9 +9,9 @@ async function getInterviewsByJobId(jobId) {
     return await Interview.find({job: jobId}).lean();
 }
 
-async function getCandidateInterviews(candidateId) {
-    return await Interview.find({ candidateId }).lean();
-}
+/*async function getCandidateInterviews(candidateId) {
+    return await Interview.find({ potentialCandidates: candidateId }).lean();
+}*/
 
 async function bookInterview(interviewData){ 
     const candidateId = interviewData.potentialCandidates;
@@ -25,6 +25,5 @@ async function bookInterview(interviewData){
 module.exports = {
     getAll,
     getInterviewsByJobId,
-    getCandidateInterviews,
     bookInterview
 }
