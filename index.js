@@ -11,6 +11,7 @@ const userController = require('./controllers/userController')
 const jobsController = require('./controllers/jobsController') 
 const candidateController = require('./controllers/candidateController')
 const interviewController = require('./controllers/interviewController')
+const companyController = require('./controllers/companyController')
 
 start()
 
@@ -32,6 +33,7 @@ async function start(){
     app.use('/candidates', candidateController)
     app.use('/jobs', jobsController)
     app.use('/interviews', interviewController)
+    app.use('/company', companyController)
 
     app.listen(PORT, () => console.log(`REST Service is running on port ${PORT}`))
 }
