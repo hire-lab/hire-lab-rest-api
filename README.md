@@ -28,7 +28,7 @@ The service is initialized with two users, which can be used for immediate testi
 * maria.ivanova@company.com : 123456
 
 #### Register
-Create a new user by sending a `POST` request to `/users/register` with properties `name`, `email` and `password`. **Only emails ending in `@company.com` will be registered successfully** . The service automatically creates returns an authorization token, that can be used for requests.
+Create a new user by sending a `POST` request to `/users/register` with properties `name`, `email` and `password`. The service automatically creates returns an authorization token, that can be used for requests.
 
 #### Login
 Login by sending a `POST` request with `email` and `password` to `/users/login`. The service will respond with an object, containing a standard string token, that can be used for requests.
