@@ -1,7 +1,7 @@
 const {Schema, model} = require('mongoose')
 
 const schema = new Schema({
-    email: {type: String, required: true, match: [/(?:\@company\.com)/, 'Please provide valid company\'s email address']},
+    email: {type: String, required: true},
     name: {type: String, required: true},
     hashedPassword:  {type: String}
 })
