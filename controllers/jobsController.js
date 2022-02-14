@@ -14,11 +14,24 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     const jobsData = {
         title: req.body.title,
-        description: req.body.description
+        companyName: req.body.companyName,
+        description: req.body.description,
+        location: req.body.location,
+        companyId: req.body.companyId
     }
     try {
         const result = await req.storage.create(jobsData)
         res.status(201).json(result)
+    } catch (err) {
+        res.status(err.status || 400).json({message: err.message})
+    }
+})
+
+router.get('/:id/jobs', async (req, res) => {
+    try {
+        const companyId = req.params.id;
+        const jobs = await req.storage.getByCompanyId(companyId);
+        res.json(jobs)
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})
     }
@@ -36,7 +49,8 @@ router.get('/:id', preloadJob(), (req, res) => {
 router.put('/:id', preloadJob(), async (req, res) => {
     const updated = {
         title: req.body.title,
-        description: req.body.description
+        description: req.body.description,
+        location: req.body.location
     }
 
     try {
