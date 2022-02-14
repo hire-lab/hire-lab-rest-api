@@ -4,6 +4,10 @@ async function getAll() {
     return await Job.find({}).lean()
 }
 
+async function getByCompanyId(companyId){
+    return await Job.find({company: companyId}).lean();
+}
+
 async function getById(id) {
     return await Job.findById(id).lean()
 }
@@ -29,6 +33,7 @@ async function remove(id){
 
 module.exports = {
     getAll,
+    getByCompanyId,
     getById,
     create, 
     update,
