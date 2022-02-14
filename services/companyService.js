@@ -20,7 +20,7 @@ async function register(name, email, password) {
     })
 
     await company.save()
-    console.log(`Authorized as ${name}`)
+    console.log(`Authorized as ${email}`)
 
     return {
         _id: company._id,
@@ -46,7 +46,7 @@ async function login(email, password){
         err.status = 401;
         throw err;
     }
-    console.log(`Authorized as ${company}`)
+    console.log(`Authorized as ${email}`)
 
     return {
         _id: company._id,
