@@ -14,7 +14,8 @@ router.get('/', async (req, res) => {
 router.post('/', async(req, res) => {
     const candidateData = {
         name: req.body.name,
-        email: req.body.email
+        email: req.body.email,
+        jobId: req.body.jobId
     }
 
     try {
