@@ -5,7 +5,7 @@ async function getAll() {
 }
 
 async function getByCompanyId(companyId){
-    return await Job.find({company: companyId}).lean();
+    return await Job.find({companyId: companyId}).lean();
 }
 
 async function getById(id) {
