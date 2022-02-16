@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/User');
 const {SECRET} = require('../config')
 
-async function register(email, name, password) {
+async function register(email, name, cv, password) {
     const existing = await User.findOne({email}).lean();
     if (existing){
         const err = new Error('Email is already in use');
@@ -16,6 +16,7 @@ async function register(email, name, password) {
     const user = new User({
         email,
         name,
+        cv,
         hashedPassword
     })
 
