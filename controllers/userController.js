@@ -2,7 +2,7 @@ const router = require('express').Router()
 const {register, login} = require('../services/userService')
 
 router.post('/register', async (req, res) => {
-    const {email, name, password} = req.body;
+    const {email, name, cv, password} = req.body;
 
     try {
         if (!email){
@@ -13,11 +13,15 @@ router.post('/register', async (req, res) => {
             throw new Error('Please fill out your name')
         }
 
+        if (!cv){
+            throw new Error('Please provide CV URL')
+        }
+
         if (password.length < 3){
             throw new Error('Password must be at least 3 characters long.')
         }
 
-        const userData = await register(email.toLowerCase().trim(), name.trim(), password.trim())
+        const userData = await register(email.toLowerCase().trim(), name.trim(), cv.trim(), password.trim())
         res.json(userData)
 
     } catch (err) {
