@@ -13,10 +13,8 @@ async function create(data) {
     const email = data.email;
 
     const existing = await Candidate.findOne({email});
-    const appliedFor = existing.jobId.includes(jobId);
-
     if (existing){
-        if (appliedFor){
+        if (existing.jobId.includes(jobId)){
             const err = new Error('You already applied for this job.');
             //err.status(409);
             throw err;
@@ -27,7 +25,10 @@ async function create(data) {
     }
 
     const result = new Candidate(data)
+
+    console.log('service data ', data)
     await result.save()
+    console.log('saved')
     return result;
 }
 
