@@ -27,6 +27,7 @@ async function register(email, name, cv, password) {
         _id: user._id,
         email: user.email,
         name: user.name,
+        cv: user.cv,
         accessToken: generateToken(user)
     };
 }
@@ -53,6 +54,7 @@ async function login(email, password){
         _id: user._id,
         email: user.email,
         name: user.name,
+        cv: user.cv,
         accessToken: generateToken(user)
     }
 }
