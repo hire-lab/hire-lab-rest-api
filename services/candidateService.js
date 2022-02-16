@@ -9,12 +9,21 @@ async function getOne(id){
 }
 
 async function create(data) {
+    const jobId = data.jobId;
     const email = data.email;
-    const existing = await Candidate.findOne({email}).lean();
+
+    const existing = await Candidate.findOne({email});
+    const appliedFor = existing.jobId.includes(jobId);
+
     if (existing){
-        const err = new Error('Email is already in use');
-        //err.status(409);
-        throw err;
+        if (appliedFor){
+            const err = new Error('You already applied for this job.');
+            //err.status(409);
+            throw err;
+        } 
+        existing.jobId.push(jobId)
+        await existing.save()
+        return existing;
     }
 
     const result = new Candidate(data)
