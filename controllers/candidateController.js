@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const preloadCandidate = require('../middlewares/preloadCandidate')
 
-router.get('/', async (req, res) => {
+router.get('/:id/candidates', async (req, res) => {
     try {
-        const candidates = await req.candidateStorage.getAll();
+        const companyId = req.params.id
+        const candidates = await req.candidateStorage.getAll(companyId);
         res.json(candidates)
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})
