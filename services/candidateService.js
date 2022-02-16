@@ -1,7 +1,7 @@
 const Candidate = require('../models/Candidate');
 
-async function getAll(){
-    return await Candidate.find({}).lean()
+async function getAll(companyId){
+    return await Candidate.find({companyId: companyId}).lean()
 }
 
 async function getOne(id){
