@@ -4,12 +4,22 @@ const preloadCandidate = require('../middlewares/preloadCandidate')
 router.get('/:id/candidates', async (req, res) => {
     try {
         const companyId = req.params.id
-        const candidates = await req.candidateStorage.getAll(companyId);
+        const candidates = await req.candidateStorage.getAllCandidatesByCompanyId(companyId);
         res.json(candidates)
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})
     }
 
+})
+
+router.get('/:id', preloadCandidate(), (req, res) => {
+    try {
+        const candidate = req.data;
+        candidate.jobs = candidate.jobId.map(j => j.title).join(', ')
+        res.json(candidate)
+    } catch (err) {
+        res.status(err.status || 400).json({message: err.message})
+    }
 })
 
 router.post('/', async(req, res) => {
@@ -24,15 +34,6 @@ router.post('/', async(req, res) => {
     try {
         const result = await req.candidateStorage.create(candidateData)
         res.status(201).json(result)
-    } catch (err) {
-        res.status(err.status || 400).json({message: err.message})
-    }
-})
-
-router.get('/:id', preloadCandidate(), (req, res) => {
-    try {
-        const candidate = req.data;
-        res.json(candidate)
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})
     }
