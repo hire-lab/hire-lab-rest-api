@@ -40,7 +40,7 @@ router.get('/:id/interviews', async (req, res) => {
     }
 })
 
-/*router.get('/:id/candidates', async (req, res) => {
+router.get('/:id/candidates', async (req, res) => {
     try {
         const jobId = req.params.id;
         const candidate = await req.candidateStorage.getByJobId(jobId)
@@ -48,7 +48,7 @@ router.get('/:id/interviews', async (req, res) => {
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})
     }
-})*/
+})
 
 router.post('/', async (req, res) => {
     const jobsData = {
