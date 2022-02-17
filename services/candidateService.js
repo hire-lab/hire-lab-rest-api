@@ -9,7 +9,7 @@ async function getOne(id){
 }
 
 async function create(data) {
-    const {name, email, jobId, companyId} = data;
+    const {name, email, cv, jobId, companyId} = data;
 
     const existing = await Candidate.findOne({email});
     if (existing){
@@ -25,7 +25,7 @@ async function create(data) {
         }
         existing.jobId.push(jobId)
         existing.companyId.push(companyId)
-        
+
         await existing.save()
         return existing;
     }
