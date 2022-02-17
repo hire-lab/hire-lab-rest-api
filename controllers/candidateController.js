@@ -1,6 +1,20 @@
 const router = require('express').Router();
 const preloadCandidate = require('../middlewares/preloadCandidate')
 
+//get single candidate by id
+router.get('/:companyId/candidates/:id', preloadCandidate(), async (req, res) => {
+    try {
+        const companyId = req.params.companyId;
+        const id = req.params.id;
+        const candidate = await req.candidateStorage.getOne(id)
+        candidate.jobs = candidate.jobId.filter(j => j.companyId == companyId).map(j => j.title).join(', ')
+        res.json(candidate)
+    } catch (err) {
+        res.status(err.status || 400).json({message: err.message})
+    }
+})
+
+//get all candidates by company id
 router.get('/:id/candidates', async (req, res) => {
     try {
         const companyId = req.params.id
@@ -9,19 +23,12 @@ router.get('/:id/candidates', async (req, res) => {
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})
     }
-
 })
 
-router.get('/:id', preloadCandidate(), (req, res) => {
-    try {
-        const candidate = req.data;
-        candidate.jobs = candidate.jobId.map(j => j.title).join(', ')
-        res.json(candidate)
-    } catch (err) {
-        res.status(err.status || 400).json({message: err.message})
-    }
-})
+//get all applied for jobs by candidate in single company
 
+
+//add new candidate
 router.post('/', async(req, res) => {
     const candidateData = {
         name: req.body.name,
@@ -39,6 +46,7 @@ router.post('/', async(req, res) => {
     }
 })
 
+//edit candidate
 router.put('/:id', preloadCandidate(), async (req, res) => {
     const updated = {
         name: req.body.name,
@@ -53,6 +61,7 @@ router.put('/:id', preloadCandidate(), async (req, res) => {
     }
 })
 
+//delete candidate
 router.delete('/:id', preloadCandidate(), async (req, res) => {
     try {
         await req.candidateStorage.remove(req.params.id)
