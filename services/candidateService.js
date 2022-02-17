@@ -8,6 +8,10 @@ async function getOne(id){
     return await Candidate.findById(id).populate('jobId').lean()
 }
 
+async function getByJobId(jobId){
+    return await Candidate.find({jobId: jobId}).lean()
+}
+
 async function create(data) {
     const {name, email, cv, jobId, companyId} = data;
 
@@ -52,6 +56,7 @@ async function remove(id) {
 module.exports = {
     getAllCandidatesByCompanyId,
     getOne,
+    getByJobId,
     create,
     update,
     remove
