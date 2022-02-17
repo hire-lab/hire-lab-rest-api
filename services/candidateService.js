@@ -9,8 +9,7 @@ async function getOne(id){
 }
 
 async function create(data) {
-    const jobId = data.jobId;
-    const email = data.email;
+    const {name, email, jobId, companyId} = data;
 
     const existing = await Candidate.findOne({email});
     if (existing){
@@ -19,16 +18,20 @@ async function create(data) {
             //err.status(409);
             throw err;
         } 
+        if (existing.companyId.includes(companyId)) {
+            existing.jobId.push(jobId)
+            await existing.save()
+            return existing;
+        }
         existing.jobId.push(jobId)
+        existing.companyId.push(companyId)
+        
         await existing.save()
         return existing;
     }
 
     const result = new Candidate(data)
-
-    console.log('service data ', data)
     await result.save()
-    console.log('saved')
     return result;
 }
 
