@@ -1,11 +1,11 @@
 const Candidate = require('../models/Candidate');
 
-async function getAll(companyId){
+async function getAllCandidatesByCompanyId(companyId){
     return await Candidate.find({companyId: companyId}).lean()
 }
 
 async function getOne(id){
-    return await Candidate.findById(id).lean()
+    return await Candidate.findById(id).populate('jobId').lean()
 }
 
 async function create(data) {
@@ -50,7 +50,7 @@ async function remove(id) {
 }
 
 module.exports = {
-    getAll,
+    getAllCandidatesByCompanyId,
     getOne,
     create,
     update,
