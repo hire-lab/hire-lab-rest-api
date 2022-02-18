@@ -14,8 +14,8 @@ async function register(name, email, password) {
     const hashedPassword = await bcrypt.hash(password, 10)
 
     const company = new Company({
-        email,
         name,
+        email,
         hashedPassword
     })
 

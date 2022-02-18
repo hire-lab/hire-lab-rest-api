@@ -13,7 +13,7 @@ async function getByJobId(jobId){
 }
 
 async function create(data) {
-    const {name, email, cv, jobId, companyId} = data;
+    const {name, email, cv, jobId, companyId, userId} = data;
 
     const existing = await Candidate.findOne({email});
     if (existing){
@@ -44,6 +44,7 @@ async function update(id, updated) {
 
     candidate.name = updated.name;
     candidate.email = updated.email;
+    candidate.cv = updated.cv;
 
     await candidate.save()
     return candidate;

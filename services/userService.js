@@ -59,7 +59,6 @@ async function login(email, password){
     }
 }
 
-
 function generateToken(user){
     const token = jwt.sign({
         _id: user._id,
@@ -69,7 +68,24 @@ function generateToken(user){
     return token;
 }
 
+async function getOne(id) {
+    return await User.findById(id).lean()
+}
+
+async function update(id, updated) {
+    const user = await User.findById(id)
+
+    user.name = updated.name;
+    user.email = updated.email;
+    user.cv = updated.cv;
+
+    await user.save()
+    return user;
+}
+
 module.exports = {
     register,
-    login
+    login,
+    getOne,
+    update
 }
