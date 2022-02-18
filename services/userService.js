@@ -82,10 +82,14 @@ async function update(id, updated) {
     await user.save()
     return user;
 }
+async function remove(id) {
+    return User.findByIdAndDelete(id)
+}
 
 module.exports = {
     register,
     login,
     getOne,
-    update
+    update,
+    remove
 }
