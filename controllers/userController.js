@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {register, login} = require('../services/userService')
+const {register, login, getOne, update} = require('../services/userService')
 
 router.post('/register', async (req, res) => {
     const {email, name, cv, password} = req.body;
@@ -47,5 +47,31 @@ router.post('/login', async (req, res) => {
 router.get('/logout', (req, res) => {
     res.status(204).end()
 })
+
+router.get('/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await getOne(id)
+        res.json(user)
+    } catch (err) {
+        res.status(err.status || 400).json({message: err.message})
+    }
+})
+
+router.put('/:id', async (req, res) => {
+    const updated = {
+        name: req.body.name,
+        email: req.body.email,
+        cv: req.body.cv
+    }
+
+    try {
+        const result = await update(req.params.id, updated)
+        res.json(result)
+    }catch (err) {
+        res.status(err.status || 400).json({message: err.message})
+    }
+})
+
 
 module.exports = router;

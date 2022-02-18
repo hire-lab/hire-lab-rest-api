@@ -1,7 +1,19 @@
 const router = require('express').Router();
 const preloadCandidate = require('../middlewares/preloadCandidate')
 
-//get single candidate by id
+//get single candidate
+router.get('/:id', preloadCandidate(), async (req, res) => {
+    try {
+        const id = req.params.id;
+        const candidate = await req.candidateStorage.getOne(id)
+        candidate.jobs = candidate.jobId.map(j => j.title).join(', ')
+        res.json(candidate)
+    } catch (err) {
+        res.status(err.status || 400).json({message: err.message})
+    }
+})
+
+//get candidate by company id
 router.get('/:companyId/candidates/:id', preloadCandidate(), async (req, res) => {
     try {
         const companyId = req.params.companyId;
@@ -35,7 +47,8 @@ router.post('/', async(req, res) => {
         email: req.body.email,
         cv: req.body.cv,
         jobId: req.body.jobId,
-        companyId: req.body.companyId
+        companyId: req.body.companyId,
+        userId: req.body.userId
     }
 
     try {
