@@ -4,10 +4,17 @@ const preloadJob = require('../middlewares/preloadJob');
 router.get('/', async (req, res) => {
     try {
         const keyword = req.query.title;
+        const location = req.query.location;
+
         let jobs = await req.storage.getAll();
 
         if (keyword){
             jobs = jobs.filter(j => j.title.toLowerCase().includes(keyword.toLowerCase()))
+            if (location){
+                jobs = jobs.filter(j => j.location.toLowerCase().includes(location.toLowerCase()))
+            }
+        } else if (location){
+            jobs = jobs.filter(j => j.location.toLowerCase().includes(location.toLowerCase()))
         }
 
         res.json(jobs)
