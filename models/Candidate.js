@@ -5,8 +5,7 @@ const schema = new Schema ({
     email: {type: String, required: true},
     cv: {type: String, required: true},
     jobId: [{type: Schema.Types.ObjectId, ref: 'Job'}],
-    companyId: [{type: Schema.Types.ObjectId, ref: 'Company'}],
-    userId: {type: Schema.Types.ObjectId, ref: 'User'}
+    companyId: [{type: Schema.Types.ObjectId, ref: 'Company'}]
 })
 
 module.exports = model('Candidate', schema)
