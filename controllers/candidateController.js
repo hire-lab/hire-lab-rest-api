@@ -37,8 +37,6 @@ router.get('/:id/candidates', async (req, res) => {
     }
 })
 
-//get all applied for jobs by candidate in single company
-
 
 //add new candidate
 router.post('/', async(req, res) => {
@@ -47,8 +45,7 @@ router.post('/', async(req, res) => {
         email: req.body.email,
         cv: req.body.cv,
         jobId: req.body.jobId,
-        companyId: req.body.companyId,
-        userId: req.body.userId
+        companyId: req.body.companyId
     }
 
     try {
