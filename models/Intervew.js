@@ -1,10 +1,9 @@
 const {Schema, model} = require('mongoose');
 
 const schema = new Schema({
-    job: {type: Schema.Types.ObjectId, ref: 'Job'},
-    potentialCandidates: [{type: Schema.Types.ObjectId, ref: 'Candidate'}],
-    jobTitle: {type: String},
-    candidateName: {type: String}
+    jobId: {type: Schema.Types.ObjectId, ref: 'Job'},
+    candidateId: {type: Schema.Types.ObjectId, ref: 'Candidate'},
+    companyId: {type: Schema.Types.ObjectId, ref: 'Company'}
 })
 
 module.exports = model('Interview', schema)
