@@ -5,7 +5,11 @@ async function getAll(companyId) {
 }
 
 async function getInterviewsByJobId(jobId) {
-    return await Interview.find({jobId: jobId}).populate('candidateId').populate('jobId').lean()
+    return await Interview.find({jobId: jobId})
+        .sort({time: -1})
+        .populate('candidateId')
+        .populate('jobId')
+        .lean()
 }
 
 /*async function getCandidateInterviews(candidateId) {
