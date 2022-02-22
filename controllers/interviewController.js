@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
+    const companyId = req.params.id
     try {
-        const filter = req.query;
-        const interviews = await req.interviewStorage.getAll(filter);
+        const interviews = await req.interviewStorage.getAll(companyId);
         res.json(interviews)
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})
@@ -12,10 +12,9 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const interviewData = {
-        job: req.body.jobId,
-        potentialCandidates: req.body.candidateId,
-        jobTitle: req.body.jobTitle,
-        candidateName: req.body.candidateName
+        jobId: req.body.jobId,
+        candidateId: req.body.candidateId,
+        companyId: req.body.companyId
     }
 
     try {
