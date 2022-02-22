@@ -19,7 +19,8 @@ router.get('/:companyId/candidates/:id', preloadCandidate(), async (req, res) =>
         const companyId = req.params.companyId;
         const id = req.params.id;
         const candidate = await req.candidateStorage.getOne(id)
-        candidate.jobs = candidate.jobId.filter(j => j.companyId == companyId).map(j => j.title).join(', ')
+        candidate.companyJobs = candidate.jobId.filter(j => j.companyId == companyId)
+        candidate.jobs = candidate.companyJobs.map(j => j.title).join(', ')
         res.json(candidate)
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})

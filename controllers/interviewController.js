@@ -14,7 +14,9 @@ router.post('/', async (req, res) => {
     const interviewData = {
         jobId: req.body.jobId,
         candidateId: req.body.candidateId,
-        companyId: req.body.companyId
+        companyId: req.body.companyId,
+        date: req.body.date,
+        time: req.body.time
     }
 
     try {
