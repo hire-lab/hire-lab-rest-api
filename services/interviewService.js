@@ -1,14 +1,19 @@
 const Interview = require('../models/Intervew');
 
-async function getAll(companyId) {
-    return await Interview.find({companyId: companyId}).populate('candidateId').populate('jobId').lean();
+async function getAll(companyId, date) {
+    return await Interview
+        .find({companyId: companyId})
+        .find({date: date})
+        .populate('candidateId')
+        .populate('jobId')
+        .lean();
 }
 
 async function getInterviewsByJobId(jobId) {
     return await Interview.find({jobId: jobId})
-        .sort({time: -1})
         .populate('candidateId')
         .populate('jobId')
+        .sort({time: -1})
         .lean()
 }
 
