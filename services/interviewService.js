@@ -35,7 +35,11 @@ async function getInterviewsByJobId(jobId, date) {
 
 async function bookInterview(interviewData){ 
     const candidateId = interviewData.candidateId;
-    const existingCandidate = await Interview.findOne({candidateId}).lean()
+    const companyId = interviewData.companyId;
+    const existingCandidate = await Interview
+        .findOne({candidateId})
+        .where({companyId: companyId})
+        .lean()
 
     if (existingCandidate){
         const err = new Error('Candidate has an interview already');
