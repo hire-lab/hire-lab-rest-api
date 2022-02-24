@@ -34,20 +34,16 @@ async function getInterviewsByJobId(jobId, date) {
 
 
 async function bookInterview(interviewData){ 
-    /*const existingCandidate = await Interview.find({candidateId: interviewData.candidateId})
-    const existingJob = await Interview.find({jobId: interviewData.jobId})
+    const candidateId = interviewData.candidateId;
+    const existingCandidate = await Interview.findOne({candidateId}).lean()
 
-    console.log(existingCandidate)
     if (existingCandidate){
-        if (existingJob){
-            const err = new Error('Candidate has an interview already');
-            throw err;
-        }
-    }*/
+        const err = new Error('Candidate has an interview already');
+        throw err;
+    }
 
     const result = new Interview(interviewData);    
     await result.save();
-    //await Candidate.findByIdAndDelete(candidateId)
     return result;
 }
 
