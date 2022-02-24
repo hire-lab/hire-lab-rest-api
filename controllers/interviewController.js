@@ -6,7 +6,6 @@ router.get('/:id', async (req, res) => {
 
     try {
         let interviews = await req.interviewStorage.getAll(companyId, date);
-        console.log(interviews)
         res.json(interviews)
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})
