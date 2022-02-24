@@ -2,10 +2,11 @@ const router = require('express').Router();
 
 router.get('/:id', async (req, res) => {
     const companyId = req.params.id;
-    let formattedDate = req.query.date.split(' ').slice(0, 4). join(' ');
+    let date = new Date(req.query.date);
 
     try {
-        let interviews = await req.interviewStorage.getAll(companyId, formattedDate);
+        let interviews = await req.interviewStorage.getAll(companyId, date);
+        console.log(interviews)
         res.json(interviews)
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})
