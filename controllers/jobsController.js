@@ -46,7 +46,8 @@ router.get('/:id/jobs', async (req, res) => {
 router.get('/:id/interviews', async (req, res) => {
     try {
         const jobId = req.params.id;
-        let interviews = await req.interviewStorage.getInterviewsByJobId(jobId);
+        let date = new Date(req.query.date);
+        let interviews = await req.interviewStorage.getInterviewsByJobId(jobId, date);
         res.json(interviews)
     } catch (err) {
         res.status(err.status || 400).json({message: err.message})
