@@ -11,22 +11,27 @@ async function getAll(companyId, date) {
                 $lt: endOfDayfrom(date)
             }
         })
+        .sort({time: 1})
         .populate('candidateId')
         .populate('jobId')
         .lean();
 }
 
-async function getInterviewsByJobId(jobId) {
-    return await Interview.find({jobId: jobId})
+async function getInterviewsByJobId(jobId, date) {
+    return await Interview
+        .find({jobId: jobId})
+        .where({
+            date: {
+                $gte: startOfDay(date),
+                $lt: endOfDayfrom(date)
+            }
+        })
+        .sort({time: 1})
         .populate('candidateId')
-        .populate('jobId')
-        .sort({time: -1})
+        .populate('jobId')      
         .lean()
 }
 
-/*async function getCandidateInterviews(candidateId) {
-    return await Interview.find({ potentialCandidates: candidateId }).lean();
-}*/
 
 async function bookInterview(interviewData){ 
     /*const existingCandidate = await Interview.find({candidateId: interviewData.candidateId})
