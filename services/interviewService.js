@@ -1,9 +1,16 @@
+const endOfDayfrom  = require('date-fns/endOfDay')
+const startOfDay = require('date-fns/startOfDay')
 const Interview = require('../models/Intervew');
 
 async function getAll(companyId, date) {
     return await Interview
         .find({companyId: companyId})
-        .find({date: date})
+        .where({
+            date: {
+                $gte: startOfDay(date),
+                $lt: endOfDayfrom(date)
+            }
+        })
         .populate('candidateId')
         .populate('jobId')
         .lean();
