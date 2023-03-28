@@ -20,7 +20,7 @@ Note that changes to the data are stored to Mongo DB Atlas.
 
 #### CRUD Operations
 
-All requests are sent to `https://hire-lab-rest-api.herokuapp.com`. Collections include `/users`, `/company`, `/candidates`, `/jobs`, `/interviews`.  Individual properties can be accessed by appending `/:propName` to the endpoint. Supported requests are `GET`, `POST`, `PUT`, `DELETE`.
+All requests are sent to `http://localhost:5555/`. Collections include `/users`, `/company`, `/candidates`, `/jobs`, `/interviews`.  Individual properties can be accessed by appending `/:propName` to the endpoint. Supported requests are `GET`, `POST`, `PUT`, `DELETE`.
 
 ### Authentication
 
