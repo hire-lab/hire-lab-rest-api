@@ -9,9 +9,9 @@
 
 ## Usage
 
-This is **REST service**, created for Hire Lab React application, currently deployed on Heroku.
+This is **REST service**, created for Hire Lab React application.
 To install all dependencies, open a terminal and run `npm install`.
-To execute it manually run `node index` or access `https://vigilant-borg-2cfac4.netlify.app`.
+To execute it manually run `node index`.
 
 ## Services
 
